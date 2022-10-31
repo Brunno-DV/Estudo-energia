@@ -1,0 +1,92 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+    <div class="container">
+        GRUPO GIMI - Software Versão 1.0.WEB
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="login" type="text" class="validate">
+            <label for="login">Login</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">vpn_key</i>
+            <input id="senha" type="text" class="validate">
+            <label for="senha">Senha</label>
+          </div>
+          <div class="input-field col s12">
+            <button class="btn waves-effect blue" id="botao">ENTRAR
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div><!--END ROW -->
+
+    </div>
+
+     <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+
+        var loginpadrao = "admin";
+        var senhapadrao = "web2022";
+
+        var loginBox = document.getElementById("login");
+        var senhaBox = document.getElementById("senha");
+        
+        document.getElementById("botao").addEventListener("click",addRecord);
+
+        function addRecord(){
+
+          var loginvalor = loginBox.value;
+          var senhavalor = senhaBox.value;
+          var validacao = 0;
+                    
+          if(loginvalor.trim().length == 0 || senhavalor.trim().length == 0){
+            //google.script.run.errorMessage();
+            M.toast({html: 'POR FAVOR PREENCHER LOGIN E SENHA'});
+          }
+          else {
+
+            if (loginvalor == loginpadrao && senhavalor == senhapadrao){
+
+              M.toast({html: 'BEM VINDO, DIVIRTA-SE!!!'});  
+
+              var data = {
+                  validacao: 1
+                };
+
+              google.script.run.validacaoLogin(data);
+
+              loginBox.value = "";
+              senhaBox.value = ""; 
+
+            }
+            else{
+
+              M.toast({html: 'SENHA OU(E) USUÁRIO ERRADOS'}); 
+
+              var data = {
+                  validacao: 0
+                };
+
+              google.script.run.validacaoLogin(data);
+
+              loginBox.value = "";
+              senhaBox.value = "";
+            }
+          }
+        }
+
+    </script>
+    </body>
+  </html>
